@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 app.route('/api')
   .get((req, res) => {
     console.log('GET request detected');
-    res.send(`Lab 5 for ${process.env.NAME}`);
+    res.send(`assign2`);
   })
   .post((req, res) => {
     console.log('POST request detected');
