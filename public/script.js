@@ -1,14 +1,3 @@
-const { default: fetch } = require("node-fetch");
-const endpoint = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json';
-
-const array = [];
-
-
-fetch(endpoint)
-    .then(blob => blob.json())
-    .then(data =>array.push(...data))
-
-
 function findMatches(wordToMatch, array) {
     return array.filter(place => {
         const regex = new RegExp(wordToMatch, 'gi');
@@ -31,8 +20,24 @@ function displayMatches() {
     console.log(matchArray);
 }
 
-const searchInput = document.querySelector('search');
-const suggestions = document.querySelector('.suggestions');
 
+
+async function loadData() {
+const endpoint = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
+const json = await data.json();
+
+const array = [];
+const prom = fetch(json);
+
+fetch(endpoint)
+  .then(blob => blob.json())
+  .then(data => array.push(...data));
+
+const searchInput = document.querySelector('.search');
+const suggestions = document.querySelector('.suggestions');
+  
 searchInput.addEventListener('change', displayMatches);
-searchInput.addEventListener('keyup', displayMatches);
+searchInput.addEventListener('keyup', displayMatches); 
+
+}
+window.onload = loadData;
